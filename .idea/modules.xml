@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/OAuth-Main.iml" filepath="$PROJECT_DIR$/OAuth-Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aouth-client/aouth-client.iml" filepath="$PROJECT_DIR$/aouth-client/aouth-client.iml" />
+    </modules>
+  </component>
+</project>
