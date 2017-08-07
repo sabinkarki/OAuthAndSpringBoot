@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/OAuthAndSpringBoot.iml" filepath="$PROJECT_DIR$/OAuthAndSpringBoot.iml" />
-      <module fileurl="file://$PROJECT_DIR$/com-client-oauth/com-client-oauth.iml" filepath="$PROJECT_DIR$/com-client-oauth/com-client-oauth.iml" />
-    </modules>
-  </component>
-</project>
