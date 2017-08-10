@@ -1,0 +1,12 @@
+package com.resource.server;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ComResourceServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ComResourceServerApplication.class, args);
+	}
+}
