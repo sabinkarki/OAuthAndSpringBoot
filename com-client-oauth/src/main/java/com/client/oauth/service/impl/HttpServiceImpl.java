@@ -14,6 +14,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,41 +26,39 @@ import java.util.List;
 /**
  * Created by sabin on 8/7/2017.
  */
+@Service
 public class HttpServiceImpl implements HttpService {
 
     //acme is client id and acmesecrete is secrete key
-    String credentials = "Basic" + Base64.getEncoder().encodeToString("acme:acmesecrete".getBytes());
+    String credential = "Basic "+ Base64.getEncoder().encodeToString("acme:acmesecret".getBytes());
 
     @Override
     public JSONObject getToken(String authCode) throws IOException, JSONException {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        //authentication server
-        HttpPost httpPost = new HttpPost("http://www.localhost:8081/oauth/token");
-        httpPost.addHeader("authorization", credentials);
+        HttpPost httpPost = new HttpPost("http://localhost:8081/oauth/token");
+
+        httpPost.setHeader("Authorization", credential);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("client_id", "acme"));
-
-        //redirect url client url.authcode is mapped in HttpController
-        params.add(new BasicNameValuePair("redirect_uri", "http://www.localhost:8080/authcode"));
+        params.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/authCode"));
         params.add(new BasicNameValuePair("code", authCode));
         params.add(new BasicNameValuePair("grant_type", "authorization_code"));
+
         httpPost.setEntity(new UrlEncodedFormEntity(params));
 
         CloseableHttpResponse response = client.execute(httpPost);
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
         StringBuffer result = new StringBuffer();
         String line = "";
         while ((line = rd.readLine()) != null) {
             result.append(line);
         }
-
         System.out.println(result.toString());
-
         JSONObject jsonObject = new JSONObject(result.toString());
-
         client.close();
 
         return jsonObject;

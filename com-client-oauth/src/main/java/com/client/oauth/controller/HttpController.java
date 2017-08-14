@@ -1,5 +1,4 @@
-package com.client.controller;
-
+package com.client.oauth.controller;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,7 +26,6 @@ public class HttpController {
     public String showAuthCode(@RequestParam("code") String authCode, Model model) {
         this.authCode = authCode;
         System.out.println(authCode);
-
         model.addAttribute("authCode", authCode);
 
         return "index";
@@ -40,7 +39,7 @@ public class HttpController {
 
     @RequestMapping("/getAuthCode")
     public String redirect() {
-        return "redirect:http://localhost:8081/oauth/authorize?response_type=code&client_id=acme&redirect_uri=http://127.0.0.1:8080/authCode";
+        return "redirect:http://localhost:8081/oauth/authorize?response_type=code&client_id=acme&redirect_uri=http://localhost:8080/authCode";
     }
 
     @RequestMapping("/getToken")
@@ -64,7 +63,7 @@ public class HttpController {
         return "index";
     }
 
-    @RequestMapping("/getPublicResource")
+    @GetMapping(value = "/getPublicResource")
     public String getPublicResource(Model model) throws IOException {
         String sentence = httpService.getPublicInfo();
         model.addAttribute("sentence", sentence);
